@@ -33,6 +33,16 @@ public/             # Static assets (textures, models)
 - Keep puzzle logic (pure functions) separate from rendering (React components) so logic is independently testable
 - Use descriptive variable names; avoid single-letter names except in math formulas where convention is clear (e.g., `x`, `y`, `z`, `dx`, `dy`)
 
+## Naming Style
+
+- **Verbose domain language** — types and functions should tell a story, not encode numbers. Use named string literals (e.g., `'frontA'`, `'near'`, `'topLeft'`) instead of raw numbers or index positions.
+- **Function names are verbs** — `getOppositeFace`, `isValidOrientation`, not `oppositeFace` or `validOrientation`.
+- **Types describe what they are** — `CubeFace`, `ViewingDirection`, `LayerDepth`, `FlatView`, not `FaceValue`, `Direction`, `Depth`, `Grid`.
+- **Opposite pairs use front/back prefix** — cube face pairs are `frontA/backA`, `frontB/backB`, `frontC/backC`.
+- **Grid positions use named keys** — `topLeft`, `topCenter`, `middleRight`, `bottomLeft`, etc. rather than array indices.
+- **Internal numbering stays internal** — the 1–6 face numbering is an implementation detail in `faces.ts`. All other code uses `CubeFace` names.
+- **Inject randomness as a parameter** — functions that need randomness accept `random: () => number = Math.random` as a default parameter.
+
 ## Testing
 
 - Every puzzle module must have corresponding tests
