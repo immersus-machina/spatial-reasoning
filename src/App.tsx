@@ -1,9 +1,5 @@
-function App() {
-  return (
-    <div>
-      <h1>Spatial Reasoning</h1>
-    </div>
-  )
-}
+import { CubePuzzleScene } from "./components/cube-puzzle-scene";
 
-export default App
+export function App() {
+  return <CubePuzzleScene />;
+}
