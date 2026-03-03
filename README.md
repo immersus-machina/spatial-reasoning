@@ -1,5 +1,7 @@
 # Spatial Reasoning
 
+Status: in development.
+
 An interactive web-based spatial reasoning test suite built with React and Three.js. The application presents 3D puzzles that measure cognitive abilities such as mental rotation, pattern recognition, and spatial awareness.
 
 ## About
