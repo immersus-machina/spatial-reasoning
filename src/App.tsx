@@ -1,5 +1,5 @@
-import { CubePuzzleScene } from "./components/cube-puzzle-scene";
+import { CubeGame } from "./components/cube-game";
 
 export function App() {
-  return <CubePuzzleScene />;
+  return <CubeGame />;
 }

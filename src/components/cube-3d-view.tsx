@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { Vector3 } from "three";
@@ -16,7 +16,10 @@ interface Cube3dViewProps {
 
 function CubeScene({ arrangement, rotation, mode }: Cube3dViewProps) {
   const groupRef = useRef<Group>(null);
-  const axis = new Vector3(rotation.axisX, rotation.axisY, rotation.axisZ);
+  const axis = useMemo(
+    () => new Vector3(rotation.axisX, rotation.axisY, rotation.axisZ),
+    [rotation.axisX, rotation.axisY, rotation.axisZ],
+  );
 
   useFrame((_, delta) => {
     if (groupRef.current) {

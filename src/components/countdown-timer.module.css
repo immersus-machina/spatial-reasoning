@@ -1,0 +1,9 @@
+.timer {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1;
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.8;
+}

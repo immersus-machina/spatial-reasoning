@@ -11,12 +11,12 @@ export function generateSceneRotation(
   const x = random() - 0.5;
   const y = random() - 0.5;
   const z = random() - 0.5;
-  const length = Math.hypot(x, y, z);
+  const length = Math.hypot(x, y, z) || 1;
 
   return {
     axisX: x / length,
     axisY: y / length,
     axisZ: z / length,
-    speed: (random() > 0.5 ? 1 : -1) * (0.3 + random() * 0.7),
+    speed: 0,
   };
 }

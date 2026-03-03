@@ -5,14 +5,24 @@ import { getFaceColor, getFaceSymbol } from "../utils/cube-face-appearance";
 import styles from "./cube-answer-grid.module.css";
 
 interface CubeAnswerGridProps {
+  readonly id: number;
   readonly view: FlatView;
   readonly mode: FaceRenderMode;
-  readonly onSelect?: () => void;
+  readonly onSelect: (id: number) => void;
 }
 
-export function CubeAnswerGrid({ view, mode, onSelect }: CubeAnswerGridProps) {
+export function CubeAnswerGrid({
+  id,
+  view,
+  mode,
+  onSelect,
+}: CubeAnswerGridProps) {
   return (
-    <button className={styles.button} onClick={onSelect} type="button">
+    <button
+      className={styles.button}
+      onClick={() => onSelect(id)}
+      type="button"
+    >
       <div className={styles.grid}>
         {FLAT_VIEW_KEYS.map((key) => (
           <div
