@@ -7,6 +7,13 @@
 }
 
 .svg {
-  width: 120px;
-  height: 120px;
+  width: clamp(80px, 20vw, 120px);
+  height: clamp(80px, 20vw, 120px);
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .svg {
+    width: clamp(56px, 18vh, 80px);
+    height: clamp(56px, 18vh, 80px);
+  }
 }

@@ -8,23 +8,33 @@
 .scene {
   flex: 1;
   min-height: 0;
+  max-height: clamp(40vh, 60vw, 100vh);
 }
 
 .answers {
   display: flex;
   justify-content: center;
-  gap: 24px;
-  padding: 24px;
+  gap: clamp(8px, 3vw, 24px);
+  padding: clamp(8px, 3vw, 24px);
 }
 
 @media (orientation: landscape) and (max-height: 500px) {
   .container {
     flex-direction: row;
+    overflow: hidden;
+  }
+
+  .scene {
+    min-width: 0;
   }
 
   .answers {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    max-height: 100%;
+    gap: clamp(4px, 2vh, 12px);
+    padding: clamp(4px, 2vh, 12px);
   }
 }

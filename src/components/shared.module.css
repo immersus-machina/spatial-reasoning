@@ -6,6 +6,8 @@
   height: 100vh;
   height: 100dvh;
   gap: 32px;
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 .title {
@@ -32,4 +34,14 @@
 
 .button:hover {
   border-color: #aaa;
+}
+
+@media (max-width: 600px) {
+  .page {
+    gap: 20px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
 }

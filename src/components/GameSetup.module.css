@@ -22,3 +22,9 @@
   opacity: 0.85;
   margin: 0;
 }
+
+@media (max-width: 600px) {
+  .rules {
+    max-width: 300px;
+  }
+}
