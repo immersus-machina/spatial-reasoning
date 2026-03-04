@@ -5,15 +5,36 @@ import { PuzzleSelection } from "./components/PuzzleSelection";
 
 type Screen = "home" | "cube" | "sphere";
 
+function Credit() {
+  return (
+    <p className="credit">
+      Concept by{" "}
+      <a href="https://www.immersus-machina.com" target="_blank" rel="noopener noreferrer">
+        Immersus Machina
+      </a>
+    </p>
+  );
+}
+
 export function App() {
   const [screen, setScreen] = useState<Screen>("home");
 
+  let content;
   switch (screen) {
     case "cube":
-      return <CubeGame onExit={() => setScreen("home")} />;
+      content = <CubeGame onExit={() => setScreen("home")} />;
+      break;
     case "sphere":
-      return <SphereGame onExit={() => setScreen("home")} />;
+      content = <SphereGame onExit={() => setScreen("home")} />;
+      break;
     default:
-      return <PuzzleSelection onSelect={setScreen} />;
+      content = <PuzzleSelection onSelect={setScreen} />;
   }
+
+  return (
+    <>
+      {content}
+      <Credit />
+    </>
+  );
 }

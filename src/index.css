@@ -23,6 +23,21 @@ body {
   height: 100vh;
 }
 
+.credit {
+  position: fixed;
+  bottom: 12px;
+  right: 16px;
+  font-size: 0.75rem;
+  opacity: 0.4;
+  margin: 0;
+  pointer-events: auto;
+}
+
+.credit a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
