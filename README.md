@@ -47,7 +47,7 @@ npm run build
 
 ## Project Structure
 
-```
+```text
 src/
   components/       # Shared React components
   puzzles/          # Puzzle logic and 3D scenes
