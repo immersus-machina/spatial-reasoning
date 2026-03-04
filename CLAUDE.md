@@ -5,7 +5,7 @@
 - **Language**: TypeScript (strict mode)
 - **Framework**: React 18+
 - **Build tool**: Vite
-- **3D rendering**: Three.js via React Three Fiber (`@react-three/fiber`) + `@react-three/drei`
+- **3D rendering**: Three.js via React Three Fiber (`@react-three/fiber`)
 - **Testing**: Vitest + `@testing-library/react`
 - **Styling**: CSS Modules (`.module.css` files)
 
@@ -17,11 +17,8 @@ src/
   puzzles/          # Puzzle logic and 3D scenes
     cube/           # Cube rotation puzzle
     sphere/         # Sphere puzzle
-    dollhouse/      # Doll house puzzle (planned)
-  utils/            # Shared utilities (math, 3D helpers)
-  types/            # TypeScript type definitions
-  tests/            # Test utilities and setup
-public/             # Static assets (textures, models)
+    utils/            # Shared utilities (math, 3D helpers)
+public/             # Static assets
 ```
 
 ## Formatting

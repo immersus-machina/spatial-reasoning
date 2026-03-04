@@ -30,6 +30,7 @@ export function SphereNeighborhoodAnswer({
       className={styles.button}
       onClick={() => onSelect(id)}
       type="button"
+      aria-label={`Neighborhood option ${id + 1}`}
     >
       <svg className={styles.svg} viewBox="0 0 140 140">
         {RING_POSITIONS.map(([cx, cy], index) => (

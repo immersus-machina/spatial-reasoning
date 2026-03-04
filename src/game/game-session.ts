@@ -19,6 +19,7 @@ export function createGameSession(durationMs: number): GameSession {
   return { durationMs, results: [] };
 }
 
+/** Immutable update — returns a new session so React state updates correctly. */
 export function addResult(
   session: GameSession,
   correct: boolean,

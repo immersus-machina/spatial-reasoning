@@ -22,6 +22,9 @@ export function DragRotateGroup({
 
     const cameraRight = new THREE.Vector3();
     const cameraUp = new THREE.Vector3();
+    const cameraForward = new THREE.Vector3();
+    const qx = new THREE.Quaternion();
+    const qy = new THREE.Quaternion();
     const q = new THREE.Quaternion();
 
     const onPointerDown = (e: PointerEvent) => {
@@ -39,21 +42,10 @@ export function DragRotateGroup({
       lastX = e.clientX;
       lastY = e.clientY;
 
-      camera.matrixWorld.extractBasis(
-        cameraRight,
-        cameraUp,
-        new THREE.Vector3(),
-      );
+      camera.matrixWorld.extractBasis(cameraRight, cameraUp, cameraForward);
 
-      const qx = new THREE.Quaternion().setFromAxisAngle(
-        cameraUp,
-        dx * sensitivity,
-      );
-      const qy = new THREE.Quaternion().setFromAxisAngle(
-        cameraRight,
-        dy * sensitivity,
-      );
-
+      qx.setFromAxisAngle(cameraUp, dx * sensitivity);
+      qy.setFromAxisAngle(cameraRight, dy * sensitivity);
       q.copy(qx).multiply(qy);
       groupRef.current.quaternion.premultiply(q);
     };

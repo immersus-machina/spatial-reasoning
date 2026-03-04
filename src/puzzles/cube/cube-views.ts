@@ -146,6 +146,7 @@ export function projectFlatView(
     projected.set(key, face);
   }
 
+  // Safe: 9 cubes in a 3x3 grid always project to all 9 positions
   return {
     topLeft: projected.get("topLeft")!,
     topCenter: projected.get("topCenter")!,

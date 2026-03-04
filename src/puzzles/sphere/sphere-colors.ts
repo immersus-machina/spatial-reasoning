@@ -14,6 +14,7 @@ export function getColor(
   arrangement: SphereArrangement,
   position: SpherePosition,
 ): SphereColor {
+  // Safe: arrangement always contains all 14 positions (8 corners + 6 faces)
   return arrangement.find((p) => p.position === position)!.color;
 }
 

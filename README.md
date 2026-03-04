@@ -14,7 +14,7 @@ The puzzle designs draw on prior work in cognitive spatial assessment, now deliv
 
 ### Cube Rotation
 
-Nine cubes are placed within a 3x3x3 grid at varying depths, each with distinct faces. The player rotates the 3D arrangement to inspect it — each face of the overall cube shows a flat 3x3 pattern made up of the visible faces from that direction. Given four candidate views, the player must identify which one is valid. Tests **mental rotation** and understanding of 3D constraints (opposite face relationships).
+Nine cubes are placed at distinct positions within a 3x3x3 grid, each with distinct faces. The player rotates the 3D arrangement to inspect it — each face of the overall cube shows a flat 3x3 pattern made up of the visible faces from that direction. Given four candidate views, the player must identify which one is valid. Tests **mental rotation** and understanding of 3D constraints (opposite face relationships).
 
 ### Sphere Arrangement
 

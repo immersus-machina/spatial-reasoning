@@ -63,5 +63,28 @@ function assignFaces(random: () => number): SpherePlacement[] {
 export function generateSphereArrangement(
   random: () => number = Math.random,
 ): SphereArrangement {
-  return [...assignCorners(random), ...assignFaces(random)] as unknown as SphereArrangement;
+  const placements = [...assignCorners(random), ...assignFaces(random)];
+
+  if (placements.length !== 14) {
+    throw new Error(
+      `Expected 14 placements, got ${placements.length}`,
+    );
+  }
+
+  return [
+    placements[0],
+    placements[1],
+    placements[2],
+    placements[3],
+    placements[4],
+    placements[5],
+    placements[6],
+    placements[7],
+    placements[8],
+    placements[9],
+    placements[10],
+    placements[11],
+    placements[12],
+    placements[13],
+  ];
 }

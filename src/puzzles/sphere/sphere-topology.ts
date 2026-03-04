@@ -30,9 +30,10 @@ type Ring6<T> = readonly [T, T, T, T, T, T];
  * The 6 neighbor positions around each corner, in ring order.
  * The ring alternates between face and corner positions.
  *
- * Each corner of the 2×2×2 cube touches 3 face-center spheres (one per axis)
- * and 3 other corner spheres (one per axis flip). These 6 neighbors form a
- * ring when ordered by alternating axis: face, corner, face, corner, ...
+ * The 14 sphere positions (8 corners + 6 face centers) and their adjacency
+ * form the vertex-face incidence graph of a cube: each corner touches 3 faces
+ * and 3 edge-adjacent corners. These 6 neighbors form a ring when ordered
+ * by alternating type: face, corner, face, corner, face, corner.
  *
  * With only 8 corners, hardcoding the rings is simpler and more readable
  * than computing them from a coordinate system with parity-dependent winding.

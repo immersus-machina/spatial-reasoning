@@ -22,6 +22,7 @@ export function CubeAnswerGrid({
       className={styles.button}
       onClick={() => onSelect(id)}
       type="button"
+      aria-label={`Answer option ${id + 1}`}
     >
       <div className={styles.grid}>
         {FLAT_VIEW_KEYS.map((key) => (
