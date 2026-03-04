@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useReducer } from "react";
 import { generateCubePuzzle } from "../puzzles/cube/cube-puzzle";
 import type { FaceRenderMode } from "../utils/cube-face-appearance";
-import { generateSceneRotation } from "../utils/scene-rotation";
 import { shuffleWithCorrect } from "../utils/shuffle";
 import { Cube3dView } from "./cube-3d-view";
 import { CubeAnswerGrid } from "./cube-answer-grid";
@@ -15,12 +14,11 @@ interface CubePuzzleSceneProps {
 function generatePuzzleState() {
   return {
     puzzle: generateCubePuzzle(),
-    rotation: generateSceneRotation(),
   };
 }
 
 export function CubePuzzleScene({ mode, onAnswer }: CubePuzzleSceneProps) {
-  const [{ puzzle, rotation }, regenerate] = useReducer(
+  const [{ puzzle }, regenerate] = useReducer(
     generatePuzzleState,
     null,
     generatePuzzleState,
@@ -47,7 +45,6 @@ export function CubePuzzleScene({ mode, onAnswer }: CubePuzzleSceneProps) {
       <div className={styles.scene}>
         <Cube3dView
           arrangement={puzzle.arrangement}
-          rotation={rotation}
           mode={mode}
         />
       </div>
