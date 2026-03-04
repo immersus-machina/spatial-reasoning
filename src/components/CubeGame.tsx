@@ -13,7 +13,11 @@ import styles from "./CubeGame.module.css";
 
 type GameState = "setup" | "playing" | "results";
 
-export function CubeGame() {
+interface CubeGameProps {
+  readonly onExit: () => void;
+}
+
+export function CubeGame({ onExit }: CubeGameProps) {
   const [state, setState] = useState<GameState>("setup");
   const [faceMode, setFaceMode] = useState<FaceRenderMode>("color");
   const [session, setSession] = useState<GameSession>(createGameSession(0));
@@ -45,7 +49,7 @@ export function CubeGame() {
 
   if (state === "setup") {
     return (
-      <GameSetup title="Cube Puzzle" onStart={handleStart}>
+      <GameSetup title="Cube Puzzle" onStart={handleStart} onExit={onExit}>
         <div className={setupStyles.section}>
           <div className={shared.label}>Display</div>
           <div className={setupStyles.options}>
@@ -70,7 +74,7 @@ export function CubeGame() {
   }
 
   if (state === "results") {
-    return <GameResults session={session} onPlayAgain={handlePlayAgain} />;
+    return <GameResults session={session} onPlayAgain={handlePlayAgain} onExit={onExit} />;
   }
 
   return (

@@ -6,9 +6,10 @@ import styles from "./GameResults.module.css";
 interface GameResultsProps {
   readonly session: GameSession;
   readonly onPlayAgain: () => void;
+  readonly onExit: () => void;
 }
 
-export function GameResults({ session, onPlayAgain }: GameResultsProps) {
+export function GameResults({ session, onPlayAgain, onExit }: GameResultsProps) {
   const stats = getSessionStats(session);
 
   return (
@@ -36,9 +37,14 @@ export function GameResults({ session, onPlayAgain }: GameResultsProps) {
         </div>
       </div>
 
-      <button className={shared.button} onClick={onPlayAgain} type="button">
-        Play Again
-      </button>
+      <div style={{ display: "flex", gap: "16px" }}>
+        <button className={shared.button} onClick={onPlayAgain} type="button">
+          Play Again
+        </button>
+        <button className={shared.button} onClick={onExit} type="button">
+          Home
+        </button>
+      </div>
     </div>
   );
 }

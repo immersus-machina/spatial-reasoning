@@ -10,7 +10,11 @@ import styles from "./SphereGame.module.css";
 
 type GameState = "setup" | "playing" | "results";
 
-export function SphereGame() {
+interface SphereGameProps {
+  readonly onExit: () => void;
+}
+
+export function SphereGame({ onExit }: SphereGameProps) {
   const [state, setState] = useState<GameState>("setup");
   const [session, setSession] = useState<GameSession>(createGameSession(0));
   const [endTime, setEndTime] = useState(0);
@@ -40,11 +44,11 @@ export function SphereGame() {
   }, []);
 
   if (state === "setup") {
-    return <GameSetup title="Sphere Puzzle" onStart={handleStart} />;
+    return <GameSetup title="Sphere Puzzle" onStart={handleStart} onExit={onExit} />;
   }
 
   if (state === "results") {
-    return <GameResults session={session} onPlayAgain={handlePlayAgain} />;
+    return <GameResults session={session} onPlayAgain={handlePlayAgain} onExit={onExit} />;
   }
 
   return (

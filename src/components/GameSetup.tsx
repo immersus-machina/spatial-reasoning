@@ -10,12 +10,16 @@ const DURATIONS = [
 interface GameSetupProps {
   readonly title: string;
   readonly onStart: (durationMs: number) => void;
+  readonly onExit: () => void;
   readonly children?: ReactNode;
 }
 
-export function GameSetup({ title, onStart, children }: GameSetupProps) {
+export function GameSetup({ title, onStart, onExit, children }: GameSetupProps) {
   return (
     <div className={shared.page}>
+      <button className={shared.button} onClick={onExit} type="button">
+        &larr; Home
+      </button>
       <h1 className={shared.title}>{title}</h1>
 
       {children}
