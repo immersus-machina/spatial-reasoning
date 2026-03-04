@@ -25,7 +25,7 @@ Colored spheres are arranged in a 3D structure — eight at the corners and six 
 - **TypeScript** with strict mode
 - **React 18+** — UI framework
 - **Vite** — Build tool and dev server
-- **Three.js** via **React Three Fiber** — 3D rendering
+- **Three.js** via **React Three Fiber** — 3D rendering with custom quaternion-based surface drag rotation
 - **Vitest** — Unit testing
 - **CSS Modules** — Component-scoped styling
 

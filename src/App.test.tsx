@@ -6,10 +6,10 @@ vi.mock("@react-three/fiber", () => ({
     <div data-testid="canvas">{children}</div>
   ),
   useFrame: () => {},
-}));
-
-vi.mock("@react-three/drei", () => ({
-  OrbitControls: () => null,
+  useThree: () => ({
+    camera: { matrixWorld: { extractBasis: () => {} } },
+    gl: { domElement: document.createElement("canvas") },
+  }),
 }));
 
 import { App } from "./App";

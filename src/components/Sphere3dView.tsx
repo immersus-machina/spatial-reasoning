@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
 import type { SphereArrangement } from "../puzzles/sphere/sphere-types";
 import { SphereMesh } from "./SphereMesh";
+import { DragRotateGroup } from "./DragRotateGroup";
 
 interface Sphere3dViewProps {
   readonly arrangement: SphereArrangement;
@@ -12,17 +12,11 @@ function SphereScene({ arrangement }: Sphere3dViewProps) {
     <>
       <ambientLight intensity={0.4} />
       <directionalLight position={[5, 5, 5]} intensity={0.8} />
-      <OrbitControls
-        enableZoom={false}
-        enablePan={false}
-        minPolarAngle={0}
-        maxPolarAngle={Math.PI}
-      />
-      <group>
+      <DragRotateGroup>
         {arrangement.map((placement) => (
           <SphereMesh key={placement.position} placement={placement} />
         ))}
-      </group>
+      </DragRotateGroup>
     </>
   );
 }
