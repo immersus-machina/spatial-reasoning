@@ -3,6 +3,7 @@ import type { CubeFace } from "../puzzles/cube/cube-types";
 import { getFaceColor, getFaceSymbol } from "./cube-face-appearance";
 
 const TEXTURE_SIZE = 128;
+// At most 6 entries (one per CubeFace), kept for the app lifetime — no dispose needed.
 const textureCache = new Map<CubeFace, CanvasTexture>();
 
 function createSymbolTexture(face: CubeFace): CanvasTexture {

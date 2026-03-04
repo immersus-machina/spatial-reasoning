@@ -10,6 +10,8 @@ interface CubeMeshProps {
   readonly mode: FaceRenderMode;
 }
 
+// No useMemo needed: this component remounts on each new puzzle via key in the parent,
+// so memoizing within a single render cycle provides no benefit.
 export function CubeMesh({ placement, mode }: CubeMeshProps) {
   const position = getPlacementPosition(
     placement.row,
