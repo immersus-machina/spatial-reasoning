@@ -8,17 +8,17 @@ An interactive web-based spatial reasoning test suite built with React and Three
 
 Spatial reasoning — the ability to mentally visualize and manipulate objects in three dimensions — is a core cognitive skill used in fields like engineering, architecture, surgery, and software development. This project provides a set of interactive 3D puzzles designed to assess and exercise these abilities.
 
-The puzzle designs draw on prior work in cognitive spatial assessment, now delivered as an accessible, zero-install web experience.
+The puzzle designs draw on prior work in cognitive spatial assessment, now delivered as an accessible, zero-install web experience. The UI is intentionally minimal — the focus is on the game mechanics and the spatial reasoning they require, not on visual polish.
 
 ## Puzzles
 
 ### Cube Rotation
 
-Nine cubes are placed in a 3x3x3 grid. The player can rotate the 3D arrangement to inspect it — each face of the overall cube shows a flat 3x3 image made up of the visible faces from that direction. Given four candidate views, the player must identify which one is valid. Tests **mental rotation** and understanding of 3D constraints (opposite face relationships).
+Nine cubes are placed within a 3x3x3 grid at varying depths, each with distinct faces. The player rotates the 3D arrangement to inspect it — each face of the overall cube shows a flat 3x3 pattern made up of the visible faces from that direction. Given four candidate views, the player must identify which one is valid. Tests **mental rotation** and understanding of 3D constraints (opposite face relationships).
 
 ### Sphere Arrangement
 
-Colored spheres are arranged in a 3D structure — eight at the corners and six at the face centers. Three colors are distributed among them. When viewed from any direction, the arrangement can be simplified to a center circle surrounded by six circles. The player can rotate the structure to examine it, and must identify which of the presented color arrangements is invalid. Tests **3D spatial reasoning** and the ability to relate a 3D structure to its 2D projections.
+Colored spheres are arranged in a 3D structure — eight at the corners and six at the face centers. Three colors are distributed among them. Each corner sphere has a neighborhood: itself as center surrounded by its six adjacent spheres in a ring. The player rotates the structure to examine it, and is shown four neighborhoods — three real, one fabricated. The player must find and remove the wrong one. Tests **3D spatial reasoning** and the ability to mentally decompose a 3D structure into local patterns.
 
 ## Tech Stack
 
@@ -49,12 +49,12 @@ npm run build
 
 ```text
 src/
-  components/       # Shared React components
-  puzzles/          # Puzzle logic and 3D scenes
+  components/       # React components (shared + puzzle-specific)
+  game/             # Game session and scoring
+  puzzles/          # Puzzle logic (pure functions, tested)
     cube/           # Cube rotation puzzle
     sphere/         # Sphere arrangement puzzle
-  utils/            # Math and 3D helper functions
-  types/            # TypeScript type definitions
+  utils/            # 3D layout, color mapping, helpers
 ```
 
 ## License
