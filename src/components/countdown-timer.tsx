@@ -8,7 +8,7 @@ interface CountdownTimerProps {
 }
 
 export function CountdownTimer({ endTime, onTimeUp }: CountdownTimerProps) {
-  const [remaining, setRemaining] = useState(endTime - Date.now());
+  const [remaining, setRemaining] = useState(() => endTime - Date.now());
   const firedRef = useRef(false);
 
   useEffect(() => {
