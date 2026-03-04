@@ -6,6 +6,7 @@ import { GameSetup } from "./GameSetup";
 import { GameResults } from "./GameResults";
 import { CubePuzzleScene } from "./CubePuzzleScene";
 import { CountdownTimer } from "./CountdownTimer";
+import { PuzzleErrorBoundary } from "./PuzzleErrorBoundary";
 import styles from "./CubeGame.module.css";
 
 type GameState = "setup" | "playing" | "results";
@@ -55,7 +56,9 @@ export function CubeGame() {
   return (
     <div className={styles.container}>
       <CountdownTimer endTime={endTime} onTimeUp={handleTimeUp} />
-      <CubePuzzleScene mode={faceMode} onAnswer={handleAnswer} />
+      <PuzzleErrorBoundary>
+        <CubePuzzleScene mode={faceMode} onAnswer={handleAnswer} />
+      </PuzzleErrorBoundary>
     </div>
   );
 }

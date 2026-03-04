@@ -134,9 +134,24 @@ export function generateCubePuzzle(
     arrangement,
     correctView,
     wrongViews: [
-      generateWrongViewWithRetries(1, allViews[wrongBaseIndices[0]], allViews, random),
-      generateWrongViewWithRetries(2, allViews[wrongBaseIndices[1]], allViews, random),
-      generateWrongViewWithRetries(3, allViews[wrongBaseIndices[2]], allViews, random),
+      generateWrongViewWithRetries(
+        1,
+        allViews[wrongBaseIndices[0]],
+        allViews,
+        random,
+      ),
+      generateWrongViewWithRetries(
+        2,
+        allViews[wrongBaseIndices[1]],
+        allViews,
+        random,
+      ),
+      generateWrongViewWithRetries(
+        3,
+        allViews[wrongBaseIndices[2]],
+        allViews,
+        random,
+      ),
     ] as const,
   };
 }
