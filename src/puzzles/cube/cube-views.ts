@@ -89,7 +89,7 @@ function projectPosition(
   placement: CubePlacement,
   direction: ViewingDirection,
 ): keyof FlatView {
-  const col = columnToNumeric(placement.column);
+  const column = columnToNumeric(placement.column);
   const row = rowToNumeric(placement.row);
   const depth = depthToNumeric(placement.depth);
 
@@ -98,19 +98,19 @@ function projectPosition(
 
   switch (direction) {
     case "front":
-      viewColumn = col;
+      viewColumn = column;
       viewRow = row;
       break;
     case "back":
-      viewColumn = col;
-      viewRow = -row;
+      viewColumn = -column;
+      viewRow = row;
       break;
     case "top":
-      viewColumn = col;
+      viewColumn = column;
       viewRow = -depth;
       break;
     case "bottom":
-      viewColumn = col;
+      viewColumn = column;
       viewRow = depth;
       break;
     case "right":

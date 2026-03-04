@@ -144,8 +144,8 @@ describe("projectFlatView", () => {
     expect(view.bottomRight).toBe("frontB");
   });
 
-  it("back view flips rows but keeps columns", () => {
-    // A cube at top/left with frontA facing viewer → from back, it should be at bottom/left showing backA
+  it("back view flips columns but keeps rows", () => {
+    // Viewing from behind = 180° rotation around vertical axis: left↔right, top stays top
     const arrangement = [
       placement("top", "left", "near", "frontA", "frontB"),
       placement("top", "center", "center", "frontB", "frontC"),
@@ -160,14 +160,12 @@ describe("projectFlatView", () => {
 
     const backView = projectFlatView(arrangement, "back");
 
-    // Back view: rows flip, columns stay.
-    // The face values are opposite (back instead of front).
-    // Top row from front → bottom row from back
-    // Back face of frontA = backA, etc.
-    expect(backView.bottomLeft).toBe("backA"); // was topLeft frontA
-    expect(backView.bottomCenter).toBe("backB"); // was topCenter frontB
-    expect(backView.bottomRight).toBe("backC"); // was topRight frontC
-    expect(backView.topLeft).toBe("backA"); // was bottomLeft frontA
+    // Back view: columns flip, rows stay.
+    // top/left from front → top/right from back (showing backA)
+    expect(backView.topRight).toBe("backA"); // was topLeft frontA
+    expect(backView.topCenter).toBe("backB"); // was topCenter frontB
+    expect(backView.topLeft).toBe("backC"); // was topRight frontC
+    expect(backView.bottomRight).toBe("backA"); // was bottomLeft frontA
   });
 });
 
