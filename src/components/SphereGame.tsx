@@ -28,7 +28,6 @@ export function SphereGame() {
     const now = Date.now();
     const timeMs = now - lastAnswerTimeRef.current;
     lastAnswerTimeRef.current = now;
-    console.log(`Answer received: correct=${correct}, timeMs=${timeMs}`);
     setSession((prev) => addResult(prev, correct, timeMs));
   }, []);
 
