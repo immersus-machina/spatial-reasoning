@@ -87,7 +87,7 @@ function generateWrongView(
 }
 
 function applyRandomRotation(view: FlatView, random: () => number): FlatView {
-  const rotations = Math.floor(random() * 3) + 1;
+  const rotations = Math.floor(random() * 4);
   let result = view;
   for (let i = 0; i < rotations; i++) {
     result = rotateFlatViewClockwise(result);
