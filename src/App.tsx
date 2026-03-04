@@ -1,4 +1,4 @@
-import { CubeGame } from "./components/cube-game";
+import { CubeGame } from "./components/CubeGame";
 
 export function App() {
   return <CubeGame />;

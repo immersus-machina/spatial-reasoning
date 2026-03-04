@@ -2,11 +2,11 @@ import { useCallback, useRef, useState } from "react";
 import type { FaceRenderMode } from "../utils/cube-face-appearance";
 import type { GameSession } from "../game/game-session";
 import { addResult, createGameSession } from "../game/game-session";
-import { GameSetup } from "./game-setup";
-import { GameResults } from "./game-results";
-import { CubePuzzleScene } from "./cube-puzzle-scene";
-import { CountdownTimer } from "./countdown-timer";
-import styles from "./cube-game.module.css";
+import { GameSetup } from "./GameSetup";
+import { GameResults } from "./GameResults";
+import { CubePuzzleScene } from "./CubePuzzleScene";
+import { CountdownTimer } from "./CountdownTimer";
+import styles from "./CubeGame.module.css";
 
 type GameState = "setup" | "playing" | "results";
 

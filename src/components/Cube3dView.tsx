@@ -2,7 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import type { CubeArrangement } from "../puzzles/cube/cube-types";
 import type { FaceRenderMode } from "../utils/cube-face-appearance";
-import { CubeMesh } from "./cube-mesh";
+import { CubeMesh } from "./CubeMesh";
 
 interface Cube3dViewProps {
   readonly arrangement: CubeArrangement;

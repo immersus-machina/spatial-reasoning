@@ -2,7 +2,7 @@ import type { FlatView } from "../puzzles/cube/cube-types";
 import { FLAT_VIEW_KEYS } from "../puzzles/cube/cube-views";
 import type { FaceRenderMode } from "../utils/cube-face-appearance";
 import { getFaceColor, getFaceSymbol } from "../utils/cube-face-appearance";
-import styles from "./cube-answer-grid.module.css";
+import styles from "./CubeAnswerGrid.module.css";
 
 interface CubeAnswerGridProps {
   readonly id: number;

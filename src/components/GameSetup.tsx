@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { FaceRenderMode } from "../utils/cube-face-appearance";
 import shared from "./shared.module.css";
-import styles from "./game-setup.module.css";
+import styles from "./GameSetup.module.css";
 
 const DURATIONS = [
   { label: "2 minutes", ms: 2 * 60 * 1000 },

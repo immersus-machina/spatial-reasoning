@@ -2,9 +2,9 @@ import { useCallback, useMemo, useReducer } from "react";
 import { generateCubePuzzle } from "../puzzles/cube/cube-puzzle";
 import type { FaceRenderMode } from "../utils/cube-face-appearance";
 import { shuffleWithCorrect } from "../utils/shuffle";
-import { Cube3dView } from "./cube-3d-view";
-import { CubeAnswerGrid } from "./cube-answer-grid";
-import styles from "./cube-puzzle-scene.module.css";
+import { Cube3dView } from "./Cube3dView";
+import { CubeAnswerGrid } from "./CubeAnswerGrid";
+import styles from "./CubePuzzleScene.module.css";
 
 interface CubePuzzleSceneProps {
   readonly mode: FaceRenderMode;

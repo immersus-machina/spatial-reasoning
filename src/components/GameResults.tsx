@@ -1,7 +1,7 @@
 import type { GameSession } from "../game/game-session";
 import { getSessionStats } from "../game/game-session";
 import shared from "./shared.module.css";
-import styles from "./game-results.module.css";
+import styles from "./GameResults.module.css";
 
 interface GameResultsProps {
   readonly session: GameSession;

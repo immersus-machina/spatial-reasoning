@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { formatTime } from "../utils/format-time";
-import styles from "./countdown-timer.module.css";
+import styles from "./CountdownTimer.module.css";
 
 interface CountdownTimerProps {
   readonly endTime: number;

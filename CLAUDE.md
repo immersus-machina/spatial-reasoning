@@ -50,7 +50,8 @@ public/             # Static assets (textures, models)
 - **Grid positions use named keys** — `topLeft`, `topCenter`, `centerRight`, `bottomLeft`, etc. rather than array indices.
 - **Internal math uses standard axes** — internal coordinate math uses `X`, `Y`, `Z` axis names (not the face-pair letters A, B, C) so cross-product logic reads naturally.
 - **Internal numbering stays internal** — the 1–6 face numbering is an implementation detail in `cube-faces.ts`. All other code uses `CubeFace` names.
-- **File names use puzzle prefix** — files within a puzzle module are prefixed with the puzzle name (e.g., `cube-types.ts`, `cube-faces.ts`, `cube-views.ts`) so they are self-identifying across the project.
+- **Component files use PascalCase** — React component files match the exported component name (e.g., `CubeGame.tsx`, `GameSetup.tsx`). Their paired CSS Module files use the same casing (e.g., `CubeGame.module.css`). Shared stylesheets that are not paired with a component use lowercase (e.g., `shared.module.css`).
+- **Puzzle logic files use kebab-case with puzzle prefix** — files within a puzzle module are prefixed with the puzzle name (e.g., `cube-types.ts`, `cube-faces.ts`, `sphere-topology.ts`) so they are self-identifying across the project.
 - **Inject randomness as a parameter** — functions that need randomness accept `random: () => number = Math.random` as a default parameter.
 
 ## Testing
