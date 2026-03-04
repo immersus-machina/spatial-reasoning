@@ -1,21 +1,17 @@
 import { useCallback, useRef, useState } from "react";
-import type { FaceRenderMode } from "../utils/cube-face-appearance";
 import type { GameSession } from "../game/game-session";
 import { addResult, createGameSession } from "../game/game-session";
 import { GameSetup } from "./GameSetup";
 import { GameResults } from "./GameResults";
-import { CubePuzzleScene } from "./CubePuzzleScene";
+import { SpherePuzzleScene } from "./SpherePuzzleScene";
 import { CountdownTimer } from "./CountdownTimer";
 import { PuzzleErrorBoundary } from "./PuzzleErrorBoundary";
-import shared from "./shared.module.css";
-import setupStyles from "./GameSetup.module.css";
-import styles from "./CubeGame.module.css";
+import styles from "./SphereGame.module.css";
 
 type GameState = "setup" | "playing" | "results";
 
-export function CubeGame() {
+export function SphereGame() {
   const [state, setState] = useState<GameState>("setup");
-  const [faceMode, setFaceMode] = useState<FaceRenderMode>("color");
   const [session, setSession] = useState<GameSession>(createGameSession(0));
   const [endTime, setEndTime] = useState(0);
   const lastAnswerTimeRef = useRef(0);
@@ -32,6 +28,7 @@ export function CubeGame() {
     const now = Date.now();
     const timeMs = now - lastAnswerTimeRef.current;
     lastAnswerTimeRef.current = now;
+    console.log(`Answer received: correct=${correct}, timeMs=${timeMs}`);
     setSession((prev) => addResult(prev, correct, timeMs));
   }, []);
 
@@ -44,29 +41,7 @@ export function CubeGame() {
   }, []);
 
   if (state === "setup") {
-    return (
-      <GameSetup title="Cube Puzzle" onStart={handleStart}>
-        <div className={setupStyles.section}>
-          <div className={shared.label}>Display</div>
-          <div className={setupStyles.options}>
-            <button
-              className={`${shared.button} ${faceMode === "color" ? setupStyles.selected : ""}`}
-              onClick={() => setFaceMode("color")}
-              type="button"
-            >
-              Colors
-            </button>
-            <button
-              className={`${shared.button} ${faceMode === "symbol" ? setupStyles.selected : ""}`}
-              onClick={() => setFaceMode("symbol")}
-              type="button"
-            >
-              Symbols
-            </button>
-          </div>
-        </div>
-      </GameSetup>
-    );
+    return <GameSetup title="Sphere Puzzle" onStart={handleStart} />;
   }
 
   if (state === "results") {
@@ -77,7 +52,7 @@ export function CubeGame() {
     <div className={styles.container}>
       <CountdownTimer endTime={endTime} onTimeUp={handleTimeUp} />
       <PuzzleErrorBoundary>
-        <CubePuzzleScene mode={faceMode} onAnswer={handleAnswer} />
+        <SpherePuzzleScene onAnswer={handleAnswer} />
       </PuzzleErrorBoundary>
     </div>
   );

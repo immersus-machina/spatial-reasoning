@@ -1,5 +1,4 @@
-import { useState } from "react";
-import type { FaceRenderMode } from "../utils/cube-face-appearance";
+import type { ReactNode } from "react";
 import shared from "./shared.module.css";
 import styles from "./GameSetup.module.css";
 
@@ -9,35 +8,17 @@ const DURATIONS = [
 ];
 
 interface GameSetupProps {
-  readonly onStart: (durationMs: number, faceMode: FaceRenderMode) => void;
+  readonly title: string;
+  readonly onStart: (durationMs: number) => void;
+  readonly children?: ReactNode;
 }
 
-export function GameSetup({ onStart }: GameSetupProps) {
-  const [faceMode, setFaceMode] = useState<FaceRenderMode>("color");
-
+export function GameSetup({ title, onStart, children }: GameSetupProps) {
   return (
     <div className={shared.page}>
-      <h1 className={shared.title}>Cube Puzzle</h1>
+      <h1 className={shared.title}>{title}</h1>
 
-      <div className={styles.section}>
-        <div className={shared.label}>Display</div>
-        <div className={styles.options}>
-          <button
-            className={`${shared.button} ${faceMode === "color" ? styles.selected : ""}`}
-            onClick={() => setFaceMode("color")}
-            type="button"
-          >
-            Colors
-          </button>
-          <button
-            className={`${shared.button} ${faceMode === "symbol" ? styles.selected : ""}`}
-            onClick={() => setFaceMode("symbol")}
-            type="button"
-          >
-            Symbols
-          </button>
-        </div>
-      </div>
+      {children}
 
       <div className={styles.section}>
         <div className={shared.label}>Duration</div>
@@ -46,7 +27,7 @@ export function GameSetup({ onStart }: GameSetupProps) {
             <button
               key={d.ms}
               className={shared.button}
-              onClick={() => onStart(d.ms, faceMode)}
+              onClick={() => onStart(d.ms)}
               type="button"
             >
               {d.label}
