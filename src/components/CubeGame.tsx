@@ -49,7 +49,12 @@ export function CubeGame({ onExit }: CubeGameProps) {
 
   if (state === "setup") {
     return (
-      <GameSetup title="Cube Puzzle" onStart={handleStart} onExit={onExit}>
+      <GameSetup
+        title="Cube Puzzle"
+        rules="You are shown a 3x3 arrangement of cubes in 3D, each with distinct faces. Rotate the scene to study it, then pick the 2D grid that correctly shows one of its faces."
+        onStart={handleStart}
+        onExit={onExit}
+      >
         <div className={setupStyles.section}>
           <div className={shared.label}>Display</div>
           <div className={setupStyles.options}>

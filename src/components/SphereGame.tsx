@@ -44,7 +44,14 @@ export function SphereGame({ onExit }: SphereGameProps) {
   }, []);
 
   if (state === "setup") {
-    return <GameSetup title="Sphere Puzzle" onStart={handleStart} onExit={onExit} />;
+    return (
+      <GameSetup
+        title="Sphere Puzzle"
+        rules="You are shown a constellation of colored spheres in 3D. Four neighborhood patterns are displayed — three match actual corners of the arrangement and one does not. Find and remove the wrong one."
+        onStart={handleStart}
+        onExit={onExit}
+      />
+    );
   }
 
   if (state === "results") {

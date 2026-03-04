@@ -14,3 +14,11 @@
   border-color: #646cff;
   background: rgba(100, 108, 255, 0.15);
 }
+
+.rules {
+  max-width: 400px;
+  text-align: center;
+  line-height: 1.6;
+  opacity: 0.85;
+  margin: 0;
+}
