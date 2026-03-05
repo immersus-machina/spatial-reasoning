@@ -12,6 +12,7 @@ import {
   computeAllNeighborhoods,
   rotateRing,
 } from "./sphere-neighborhoods";
+import { pickDistinctIndices } from "../../utils/random";
 
 const MAX_WRONG_ANSWER_RETRIES = 20;
 
@@ -25,21 +26,6 @@ function applyRandomRingRotation(
     ring = rotateRing(ring);
   }
   return { center: neighborhood.center, ring };
-}
-
-function pickDistinctIndices(
-  count: number,
-  max: number,
-  random: () => number,
-): number[] {
-  const indices: number[] = [];
-  while (indices.length < count) {
-    const idx = Math.floor(random() * max);
-    if (!indices.includes(idx)) {
-      indices.push(idx);
-    }
-  }
-  return indices;
 }
 
 /**

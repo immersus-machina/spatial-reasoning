@@ -22,6 +22,7 @@ import type {
   GridRow,
 } from "./cube-types";
 import { getAllFaces, getPerpendicularFaces } from "./cube-faces";
+import { pickRandom, shuffle } from "../../utils/random";
 
 // ── Grid layout ────────────────────────────────────────────────────────
 
@@ -55,19 +56,6 @@ const COLUMNS: readonly GridColumn[] = [
 
 const MAX_CUBES_PER_FACE = 3;
 const MAX_RANDOM_RETRIES = 100;
-
-function pickRandom<T>(items: readonly T[], random: () => number): T {
-  return items[Math.floor(random() * items.length)];
-}
-
-function shuffle(items: number[], random: () => number): number[] {
-  const result = [...items];
-  for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
-  }
-  return result;
-}
 
 function generateOrientations(
   random: () => number,

@@ -7,42 +7,12 @@ import {
   areFlatViewsEqual,
   FLAT_VIEW_KEYS,
 } from "./cube-views";
+import { pickDistinctIndices } from "../../utils/random";
 
-// ── Helpers ───────────────────────────────────────────────────────────
+// ── Constants ─────────────────────────────────────────────────────────
 
 const VIEW_COUNT = 6;
-
-function randomViewIndex(random: () => number): number {
-  return Math.floor(random() * VIEW_COUNT);
-}
-
-function pickThreeDistinctViewIndices(
-  random: () => number,
-): [number, number, number] {
-  const indices: number[] = [];
-  while (indices.length < 3) {
-    const index = randomViewIndex(random);
-    if (!indices.includes(index)) {
-      indices.push(index);
-    }
-  }
-  return indices as [number, number, number];
-}
-
-// ── Wrong answer generation ────────────────────────────────────────────
-
-function pickDistinctPositions(count: number, random: () => number): number[] {
-  const positions: number[] = [];
-
-  while (positions.length < count) {
-    const index = Math.floor(random() * 9);
-    if (!positions.includes(index)) {
-      positions.push(index);
-    }
-  }
-
-  return positions;
-}
+const POSITION_COUNT = 9;
 
 /**
  * Check whether a candidate wrong view matches any of the valid views
@@ -71,7 +41,7 @@ function generateWrongView(
   random: () => number,
 ): FlatView | null {
   const replacements = Object.fromEntries(
-    pickDistinctPositions(errorCount, random).map((pos) => {
+    pickDistinctIndices(errorCount, POSITION_COUNT, random).map((pos) => {
       const key = FLAT_VIEW_KEYS[pos];
       return [key, getRandomDifferentFace(baseView[key], random)];
     }),
@@ -124,11 +94,11 @@ export function generateCubePuzzle(
   const allViews = computeAllFlatViews(arrangement);
 
   const correctView = applyRandomRotation(
-    allViews[randomViewIndex(random)],
+    allViews[Math.floor(random() * VIEW_COUNT)],
     random,
   );
 
-  const wrongBaseIndices = pickThreeDistinctViewIndices(random);
+  const wrongBaseIndices = pickDistinctIndices(3, VIEW_COUNT, random);
 
   return {
     arrangement,
