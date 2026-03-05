@@ -18,8 +18,8 @@ import { pickDistinct, pickIntInRange, pickRandom } from "../../utils/random";
 
 // ── Constants ─────────────────────────────────────────────────────────
 
-const EASY_OBJECT_COUNT = { min: 4, max: 7 };
-const HARD_OBJECT_COUNT = { min: 6, max: 10 };
+const EASY_OBJECT_COUNT = { min: 5, max: 8 };
+const HARD_OBJECT_COUNT = { min: 7, max: 11 };
 const MAX_OBJECT_GENERATION_RETRIES = 100;
 
 // ── Helpers ──────────────────────────────────────────────────────────

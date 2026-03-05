@@ -10,7 +10,10 @@ import {
   ALL_FLAT_SHAPES,
   EASY_FLAT_SHAPES,
 } from "./box-shapes";
-import { generateBoxArrangement, reorientForMutability } from "./box-arrangement";
+import {
+  generateBoxArrangement,
+  reorientForMutability,
+} from "./box-arrangement";
 import { computeAllProjectedViews } from "./box-views";
 import { findMutableCells } from "./box-mutability";
 import { pickDistinct } from "../../utils/random";
@@ -81,7 +84,12 @@ export function generateBoxPuzzle(
   // "square" face points toward the missing direction, making them mutable.
   if (mutableCells.length < MIN_MUTABLE_CELLS) {
     const deficit = MIN_MUTABLE_CELLS - mutableCells.length;
-    arrangement = reorientForMutability(arrangement, missingDirection, deficit, random);
+    arrangement = reorientForMutability(
+      arrangement,
+      missingDirection,
+      deficit,
+      random,
+    );
     mutableCells = findMutableCells(
       arrangement,
       missingDirection,
