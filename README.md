@@ -1,7 +1,5 @@
 # Spatial Reasoning
 
-Status: in development.
-
 An interactive web-based spatial reasoning test suite built with React and Three.js. The application presents 3D puzzles that measure cognitive abilities such as mental rotation, pattern recognition, and spatial awareness.
 
 ## About
@@ -19,6 +17,10 @@ Nine cubes are placed at distinct positions within a 3x3x3 grid, each with disti
 ### Sphere Arrangement
 
 Colored spheres are arranged in a 3D structure — eight at the corners and six at the face centers. Three colors are distributed among them. Each corner sphere has a neighborhood: itself as center surrounded by its six adjacent spheres in a ring. The player rotates the structure to examine it, and is shown four neighborhoods — three real, one fabricated. The player must find and remove the wrong one. Tests **3D spatial reasoning** and the ability to mentally decompose a 3D structure into local patterns.
+
+### Box Projection
+
+Colored 3D shapes (cubes, spheres, cones, cylinders, prisms, pyramids) are placed inside a box. The player sees two of the three orthographic projections (top, front, side) rendered on the faces of an isometric box diagram, while the third face shows "?". Given four candidate projections, the player must identify the correct one. A specimen viewer lets the player rotate each 3D shape to understand what projections it produces. Available in easy (3×3) and hard (4×4) grid sizes. Tests **perspective taking** and the ability to reason about how 3D objects project onto 2D planes from different directions.
 
 ## Tech Stack
 
@@ -52,6 +54,7 @@ src/
   components/       # React components (shared + puzzle-specific)
   game/             # Game session and scoring
   puzzles/          # Puzzle logic (pure functions, tested)
+    box/            # Box projection puzzle
     cube/           # Cube rotation puzzle
     sphere/         # Sphere arrangement puzzle
   utils/            # 3D layout, color mapping, helpers
