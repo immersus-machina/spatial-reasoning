@@ -1,13 +1,4 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  position: relative;
-}
-
 .scene {
-  flex: 1;
-  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,49 +8,4 @@
   display: flex;
   align-items: center;
   gap: clamp(24px, 5vw, 64px);
-}
-
-.prompt {
-  text-align: center;
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  opacity: 0.7;
-  padding: 4px 0;
-}
-
-.answers {
-  display: flex;
-  justify-content: center;
-  gap: clamp(8px, 3vw, 24px);
-  padding: clamp(12px, 4vw, 32px);
-}
-
-@media (orientation: landscape) and (max-height: 500px) {
-  .container {
-    flex-direction: row;
-    overflow: hidden;
-  }
-
-  .scene {
-    min-width: 0;
-  }
-
-  .prompt {
-    writing-mode: vertical-lr;
-    transform: rotate(180deg);
-    white-space: nowrap;
-    padding: 0;
-    align-self: center;
-  }
-
-  .answers {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    max-height: 100%;
-    gap: clamp(4px, 2vh, 12px);
-    padding: clamp(4px, 2vh, 12px);
-  }
 }

@@ -5,6 +5,7 @@ import { shuffleWithCorrect } from "../utils/shuffle";
 import { BoxIsometricDiagram } from "./BoxIsometricDiagram";
 import { BoxAnswerGrid } from "./BoxAnswerGrid";
 import { BoxSpecimenViewer } from "./BoxSpecimenViewer";
+import shared from "./shared.module.css";
 import styles from "./BoxPuzzleScene.module.css";
 
 interface BoxPuzzleSceneProps {
@@ -39,8 +40,8 @@ export function BoxPuzzleScene({ difficulty, onAnswer }: BoxPuzzleSceneProps) {
   );
 
   return (
-    <div className={styles.container}>
-      <div className={styles.scene}>
+    <div className={shared.puzzleContainer}>
+      <div className={`${shared.puzzleScene} ${styles.scene}`}>
         <div className={styles.sceneContent}>
           <BoxIsometricDiagram
             knownViews={puzzle.knownViews}
@@ -49,8 +50,8 @@ export function BoxPuzzleScene({ difficulty, onAnswer }: BoxPuzzleSceneProps) {
           <BoxSpecimenViewer objects={puzzle.arrangement.objects} />
         </div>
       </div>
-      <div className={styles.prompt}>Pick the correct view</div>
-      <div className={styles.answers}>
+      <div className={shared.puzzlePrompt}>Pick the correct view</div>
+      <div className={shared.puzzleAnswers}>
         {shuffled.answers.map((answer) => (
           <BoxAnswerGrid
             key={answer.id}

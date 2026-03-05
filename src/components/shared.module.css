@@ -36,6 +36,67 @@
   border-color: #aaa;
 }
 
+/* ── Puzzle layout: 80% question / 20% answers ────────────── */
+
+.puzzleContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.puzzleScene {
+  flex: 4;
+  min-height: 0;
+}
+
+.puzzlePrompt {
+  text-align: center;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  padding: 4px 0;
+}
+
+.puzzleAnswers {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 3vw, 24px);
+  padding: 0 clamp(8px, 3vw, 24px);
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .puzzleContainer {
+    flex-direction: row;
+    overflow: hidden;
+  }
+
+  .puzzleScene {
+    min-width: 0;
+  }
+
+  .puzzlePrompt {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    white-space: nowrap;
+    padding: 0;
+    align-self: center;
+  }
+
+  .puzzleAnswers {
+    flex: unset;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 20%;
+    max-height: 100%;
+    gap: clamp(4px, 2vh, 12px);
+    padding: clamp(4px, 2vh, 12px);
+  }
+}
+
 @media (max-width: 600px) {
   .page {
     gap: 20px;

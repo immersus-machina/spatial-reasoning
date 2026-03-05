@@ -4,7 +4,7 @@ import type { FaceRenderMode } from "../utils/cube-face-appearance";
 import { shuffleWithCorrect } from "../utils/shuffle";
 import { Cube3dView } from "./Cube3dView";
 import { CubeAnswerGrid } from "./CubeAnswerGrid";
-import styles from "./CubePuzzleScene.module.css";
+import shared from "./shared.module.css";
 
 interface CubePuzzleSceneProps {
   readonly mode: FaceRenderMode;
@@ -41,14 +41,15 @@ export function CubePuzzleScene({ mode, onAnswer }: CubePuzzleSceneProps) {
   );
 
   return (
-    <div className={styles.container}>
-      <div className={styles.scene}>
+    <div className={shared.puzzleContainer}>
+      <div className={shared.puzzleScene}>
         <Cube3dView
           arrangement={puzzle.arrangement}
           mode={mode}
         />
       </div>
-      <div className={styles.answers}>
+      <div className={shared.puzzlePrompt}>Pick the correct view</div>
+      <div className={shared.puzzleAnswers}>
         {shuffled.answers.map((answer) => (
           <CubeAnswerGrid
             key={answer.id}

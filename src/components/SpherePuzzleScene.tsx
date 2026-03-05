@@ -3,7 +3,7 @@ import { generateSpherePuzzle } from "../puzzles/sphere/sphere-puzzle";
 import { shuffleWithCorrect } from "../utils/shuffle";
 import { Sphere3dView } from "./Sphere3dView";
 import { SphereNeighborhoodAnswer } from "./SphereNeighborhoodAnswer";
-import styles from "./SpherePuzzleScene.module.css";
+import shared from "./shared.module.css";
 
 interface SpherePuzzleSceneProps {
   readonly onAnswer: (correct: boolean) => void;
@@ -45,12 +45,12 @@ export function SpherePuzzleScene({ onAnswer }: SpherePuzzleSceneProps) {
   );
 
   return (
-    <div className={styles.container}>
-      <div className={styles.scene}>
+    <div className={shared.puzzleContainer}>
+      <div className={shared.puzzleScene}>
         <Sphere3dView arrangement={puzzle.arrangement} />
       </div>
-      <div className={styles.prompt}>Remove the wrong one</div>
-      <div className={styles.answers}>
+      <div className={shared.puzzlePrompt}>Remove the wrong one</div>
+      <div className={shared.puzzleAnswers}>
         {shuffled.answers.map((answer) => (
           <SphereNeighborhoodAnswer
             key={answer.id}
