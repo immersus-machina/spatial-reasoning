@@ -3,8 +3,6 @@ import { getBoxColorHex } from "../utils/box-appearance";
 
 interface BoxProjectedGridProps {
   readonly view: ProjectedView;
-  /** Whether to show "?" overlay instead of shapes. */
-  readonly hidden?: boolean;
 }
 
 const CELL_SIZE = 40;
@@ -91,7 +89,7 @@ function renderFlatShape(
   }
 }
 
-export function BoxProjectedGrid({ view, hidden }: BoxProjectedGridProps) {
+export function BoxProjectedGrid({ view }: BoxProjectedGridProps) {
   const totalSize = view.gridSize * CELL_SIZE + (view.gridSize - 1) * GRID_GAP;
 
   return (
@@ -117,8 +115,7 @@ export function BoxProjectedGrid({ view, hidden }: BoxProjectedGridProps) {
       )}
 
       {/* Shapes in occupied cells */}
-      {!hidden &&
-        view.cells.map((cell) =>
+      {view.cells.map((cell) =>
           renderFlatShape(
             cell.shape,
             getBoxColorHex(cell.color),
@@ -127,21 +124,6 @@ export function BoxProjectedGrid({ view, hidden }: BoxProjectedGridProps) {
             `shape-${cell.row}-${cell.column}`,
           ),
         )}
-
-      {/* "?" overlay for hidden view */}
-      {hidden && (
-        <text
-          x={totalSize / 2}
-          y={totalSize / 2}
-          textAnchor="middle"
-          dominantBaseline="central"
-          fill="#666"
-          fontSize={totalSize * 0.4}
-          fontWeight="bold"
-        >
-          ?
-        </text>
-      )}
     </svg>
   );
 }

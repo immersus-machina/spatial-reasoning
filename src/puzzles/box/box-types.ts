@@ -1,9 +1,8 @@
-/** The 3 shape types available in easy mode. */
-export type BoxShape = "cube" | "sphere" | "cone";
-
-/** All 6 shape types available in hard mode (superset of BoxShape). */
-export type BoxShapeHard =
-  | BoxShape
+/** All 3D shape types used in the box puzzle. */
+export type BoxShape =
+  | "cube"
+  | "sphere"
+  | "cone"
   | "cylinder"
   | "triangularPrism"
   | "squarePyramid";
@@ -39,7 +38,7 @@ export interface FaceMapping {
 
 /** A single 3D object placed in the box. */
 export interface BoxObject {
-  readonly shape: BoxShapeHard;
+  readonly shape: BoxShape;
   readonly color: BoxColor;
   readonly x: number;
   readonly y: number;

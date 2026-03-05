@@ -14,8 +14,12 @@ export function getColor(
   arrangement: SphereArrangement,
   position: SpherePosition,
 ): SphereColor {
-  // Safe: arrangement always contains all 14 positions (8 corners + 6 faces)
-  return arrangement.find((p) => p.position === position)!.color;
+  const entry = arrangement.find((p) => p.position === position);
+  if (!entry) {
+    // This should never happen if the arrangement is valid, but we throw an error just in case to avoid returning undefined.
+    throw new Error(`Missing sphere at position "${position}"`);
+  }
+  return entry.color;
 }
 
 export function getRandomDifferentColor(

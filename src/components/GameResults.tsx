@@ -37,7 +37,7 @@ export function GameResults({ session, onPlayAgain, onExit }: GameResultsProps) 
         </div>
       </div>
 
-      <div style={{ display: "flex", gap: "16px" }}>
+      <div className={styles.actions}>
         <button className={shared.button} onClick={onPlayAgain} type="button">
           Play Again
         </button>

@@ -15,6 +15,11 @@
   font-weight: bold;
 }
 
+.actions {
+  display: flex;
+  gap: 16px;
+}
+
 @media (max-width: 600px) {
   .stats {
     gap: 20px;

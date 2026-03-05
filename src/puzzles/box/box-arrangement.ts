@@ -3,7 +3,7 @@ import type {
   BoxColor,
   BoxDifficulty,
   BoxObject,
-  BoxShapeHard,
+  BoxShape,
   FaceMapping,
   ViewingDirection,
 } from "./box-types";
@@ -32,11 +32,11 @@ const MAX_OBJECT_GENERATION_RETRIES = 100;
  */
 function generateObjects(
   count: number,
-  shapes: readonly BoxShapeHard[],
+  shapes: readonly BoxShape[],
   random: () => number,
-): { shape: BoxShapeHard; color: BoxColor }[] {
-  const result: { shape: BoxShapeHard; color: BoxColor }[] = [];
-  const shapeCounts = new Map<BoxShapeHard, number>();
+): { shape: BoxShape; color: BoxColor }[] {
+  const result: { shape: BoxShape; color: BoxColor }[] = [];
+  const shapeCounts = new Map<BoxShape, number>();
   const maxPerShape = Math.floor(count / 2);
 
   let attempts = 0;

@@ -1,7 +1,7 @@
 import type {
   BaseShape,
   BoxDifficulty,
-  BoxShapeHard,
+  BoxShape,
   FaceMapping,
   FlatShape,
   ViewingDirection,
@@ -15,7 +15,7 @@ type BaseFaces = Readonly<Record<ViewingDirection, BaseShape>>;
  * The 3 base face shapes for each 3D shape type before any random rotation.
  * Triangles are not oriented at this stage.
  */
-const SHAPE_FACES: Record<BoxShapeHard, BaseFaces> = {
+const SHAPE_FACES: Record<BoxShape, BaseFaces> = {
   cube: { top: "square", front: "square", side: "square" },
   sphere: { top: "circle", front: "circle", side: "circle" },
   cone: { top: "triangle", front: "triangle", side: "circle" },
@@ -26,9 +26,9 @@ const SHAPE_FACES: Record<BoxShapeHard, BaseFaces> = {
 
 export const ALL_DIRECTIONS: readonly ViewingDirection[] = ["top", "front", "side"];
 
-export const EASY_SHAPES: readonly BoxShapeHard[] = ["cube", "sphere", "cylinder"];
+export const EASY_SHAPES: readonly BoxShape[] = ["cube", "sphere", "cylinder"];
 
-export const HARD_SHAPES: readonly BoxShapeHard[] = [
+export const HARD_SHAPES: readonly BoxShape[] = [
   "cube",
   "sphere",
   "cone",
@@ -65,7 +65,7 @@ const TRIANGLE_ORIENTATIONS: readonly FlatShape[] = [
 
 export function getShapesForDifficulty(
   difficulty: BoxDifficulty,
-): readonly BoxShapeHard[] {
+): readonly BoxShape[] {
   return difficulty === "easy" ? EASY_SHAPES : HARD_SHAPES;
 }
 
@@ -135,7 +135,7 @@ const CORRELATED_ORIENTATIONS: Record<
  */
 function orientTriangles(
   baseFaces: BaseFaces,
-  shape: BoxShapeHard,
+  shape: BoxShape,
   random: () => number,
 ): FaceMapping {
   const result: Record<ViewingDirection, FlatShape> = {
@@ -170,7 +170,7 @@ function orientTriangles(
  * from each of the 3 view directions.
  */
 export function assignFaceMapping(
-  shape: BoxShapeHard,
+  shape: BoxShape,
   random: () => number,
 ): FaceMapping {
   const baseFaces = SHAPE_FACES[shape];

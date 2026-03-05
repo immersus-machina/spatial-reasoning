@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import { Shape, ExtrudeGeometry, BufferGeometry, Float32BufferAttribute } from "three";
-import type { BoxShapeHard } from "../puzzles/box/box-types";
+import type { BoxShape } from "../puzzles/box/box-types";
 
 interface BoxObjectMeshProps {
-  readonly shape: BoxShapeHard;
+  readonly shape: BoxShape;
   readonly color: string;
 }
 

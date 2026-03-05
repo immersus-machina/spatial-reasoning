@@ -1,8 +1,5 @@
 /** Pick a single random item from an array. */
-export function pickRandom<T>(
-  items: readonly T[],
-  random: () => number,
-): T {
+export function pickRandom<T>(items: readonly T[], random: () => number): T {
   return items[Math.floor(random() * items.length)];
 }
 
@@ -22,7 +19,8 @@ export function pickDistinct<T>(
   return result;
 }
 
-/** Pick n distinct indices from the range [0, max). */
+/** Pick n distinct indices from the range [0, max). Uses rejection sampling,
+ * so degrades when count approaches max. (No problem for current use cases.) */
 export function pickDistinctIndices(
   count: number,
   max: number,
