@@ -38,6 +38,15 @@ export function pickDistinctIndices(
   return indices;
 }
 
+/** Pick a random integer in [min, max] (inclusive). */
+export function pickIntInRange(
+  min: number,
+  max: number,
+  random: () => number,
+): number {
+  return min + Math.floor(random() * (max - min + 1));
+}
+
 /** Fisher-Yates shuffle (returns a new array). */
 export function shuffle<T>(items: readonly T[], random: () => number): T[] {
   const result = [...items];
