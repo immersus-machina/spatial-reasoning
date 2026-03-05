@@ -1,8 +1,15 @@
-import { useState } from "react";
-import { BoxGame } from "./components/BoxGame";
-import { CubeGame } from "./components/CubeGame";
-import { SphereGame } from "./components/SphereGame";
+import { lazy, Suspense, useState } from "react";
 import { PuzzleSelection } from "./components/PuzzleSelection";
+
+const CubeGame = lazy(() =>
+  import("./components/CubeGame").then((m) => ({ default: m.CubeGame })),
+);
+const SphereGame = lazy(() =>
+  import("./components/SphereGame").then((m) => ({ default: m.SphereGame })),
+);
+const BoxGame = lazy(() =>
+  import("./components/BoxGame").then((m) => ({ default: m.BoxGame })),
+);
 
 type Screen = "home" | "cube" | "sphere" | "box";
 
@@ -37,7 +44,7 @@ export function App() {
 
   return (
     <>
-      {content}
+      <Suspense>{content}</Suspense>
       <Credit />
     </>
   );
