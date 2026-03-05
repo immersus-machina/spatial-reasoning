@@ -1,0 +1,21 @@
+.button {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  outline: none;
+}
+
+.gridWrapper {
+  width: clamp(80px, 16.7vw, 120px);
+  height: clamp(80px, 16.7vw, 120px);
+  border-style: solid;
+  border-radius: 4px;
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .gridWrapper {
+    width: clamp(56px, 18vh, 80px);
+    height: clamp(56px, 18vh, 80px);
+  }
+}

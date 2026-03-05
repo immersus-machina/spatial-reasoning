@@ -2,7 +2,7 @@ import shared from "./shared.module.css";
 import styles from "./PuzzleSelection.module.css";
 
 interface PuzzleSelectionProps {
-  readonly onSelect: (puzzle: "cube" | "sphere") => void;
+  readonly onSelect: (puzzle: "cube" | "sphere" | "box") => void;
 }
 
 export function PuzzleSelection({ onSelect }: PuzzleSelectionProps) {
@@ -30,6 +30,17 @@ export function PuzzleSelection({ onSelect }: PuzzleSelectionProps) {
           <span className={styles.cardTitle}>Sphere Puzzle</span>
           <span className={styles.cardDescription}>
             Find the wrong neighborhood in a sphere constellation
+          </span>
+        </button>
+
+        <button
+          className={styles.card}
+          onClick={() => onSelect("box")}
+          type="button"
+        >
+          <span className={styles.cardTitle}>Box Projection</span>
+          <span className={styles.cardDescription}>
+            Identify the correct orthographic projection of objects in a box
           </span>
         </button>
       </div>

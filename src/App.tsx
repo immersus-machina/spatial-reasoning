@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { BoxGame } from "./components/BoxGame";
 import { CubeGame } from "./components/CubeGame";
 import { SphereGame } from "./components/SphereGame";
 import { PuzzleSelection } from "./components/PuzzleSelection";
 
-type Screen = "home" | "cube" | "sphere";
+type Screen = "home" | "cube" | "sphere" | "box";
 
 function Credit() {
   return (
@@ -26,6 +27,9 @@ export function App() {
       break;
     case "sphere":
       content = <SphereGame onExit={() => setScreen("home")} />;
+      break;
+    case "box":
+      content = <BoxGame onExit={() => setScreen("home")} />;
       break;
     default:
       content = <PuzzleSelection onSelect={setScreen} />;

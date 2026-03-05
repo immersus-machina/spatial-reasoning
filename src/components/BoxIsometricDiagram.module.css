@@ -1,0 +1,78 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-top: 12px;
+}
+
+.topRow {
+  display: flex;
+  justify-content: center;
+}
+
+.middleRow {
+  display: flex;
+  justify-content: center;
+}
+
+.wireframe {
+  width: clamp(48px, 8vw, 80px);
+  height: clamp(48px, 8vw, 80px);
+}
+
+.bottomRow {
+  display: flex;
+  justify-content: center;
+  gap: clamp(48px, 8vw, 80px);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.viewSquare {
+  width: clamp(72px, 12vw, 120px);
+  height: clamp(72px, 12vw, 120px);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.hidden {
+  background: #0d0d1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.questionMark {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #555;
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .viewSquare {
+    width: clamp(48px, 12vh, 90px);
+    height: clamp(48px, 12vh, 90px);
+  }
+
+  .wireframe {
+    width: clamp(36px, 6vh, 60px);
+    height: clamp(36px, 6vh, 60px);
+  }
+
+  .bottomRow {
+    gap: clamp(36px, 6vh, 60px);
+  }
+}

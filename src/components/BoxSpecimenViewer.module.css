@@ -1,0 +1,64 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.canvas {
+  width: clamp(72px, 12vw, 100px);
+  height: clamp(72px, 12vw, 100px);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3px;
+  max-width: clamp(120px, 20vw, 180px);
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px;
+  border: 1px solid #444;
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  font-size: 0.625rem;
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: #888;
+}
+
+.chipSelected {
+  border-color: #aaa;
+  background: #222;
+}
+
+.chipDot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .canvas {
+    width: clamp(48px, 10vh, 72px);
+    height: clamp(48px, 10vh, 72px);
+  }
+
+  .chips {
+    max-width: clamp(90px, 16vh, 140px);
+  }
+
+  .chip {
+    font-size: 0.5625rem;
+    padding: 1px 4px;
+  }
+}
