@@ -18,9 +18,8 @@ import { pickDistinct, pickIntInRange, pickRandom } from "../../utils/random";
 
 // ── Constants ─────────────────────────────────────────────────────────
 
-const EASY_OBJECT_COUNT = { min: 5, max: 8 };
-const HARD_OBJECT_COUNT = { min: 7, max: 11 };
-const MAX_PLACEMENT_RETRIES = 200;
+const EASY_OBJECT_COUNT = { min: 4, max: 7 };
+const HARD_OBJECT_COUNT = { min: 6, max: 10 };
 const MAX_OBJECT_GENERATION_RETRIES = 100;
 
 // ── Helpers ──────────────────────────────────────────────────────────
@@ -59,20 +58,49 @@ function generateObjects(
   return result;
 }
 
+interface Position {
+  x: number;
+  y: number;
+  z: number;
+}
+
+/** Fisher-Yates shuffle returning a random permutation of [0..n-1]. */
+function randomPermutation(n: number, random: () => number): number[] {
+  const perm = Array.from({ length: n }, (_, i) => i);
+  for (let i = n - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [perm[i], perm[j]] = [perm[j], perm[i]];
+  }
+  return perm;
+}
+
 /**
- * Projection key for collision detection.
- * Each view direction projects (x,y,z) down to a 2D position.
+ * Generate N² conflict-free positions from a randomized Latin square.
  *
- * - Top: (x, z) — looking down Y axis
- * - Front: (z, y) — looking along X axis
- * - Side: (x, y) — looking along Z axis
+ * A Latin square L[x][y] = z ensures:
+ * - All (x, z) pairs are distinct (top projection)
+ * - All (z, y) pairs are distinct (front projection)
+ * - All (x, y) pairs are distinct (side projection)
+ *
+ * We start with L[x][y] = (x + y) % N and randomize by permuting
+ * the row indices, column indices, and symbol values.
  */
-function projectionKeys(
-  x: number,
-  y: number,
-  z: number,
-): [string, string, string] {
-  return [`top:${x},${z}`, `front:${z},${y}`, `side:${x},${y}`];
+function buildLatinSquarePositions(
+  gridSize: number,
+  random: () => number,
+): Position[] {
+  const rowPerm = randomPermutation(gridSize, random);
+  const colPerm = randomPermutation(gridSize, random);
+  const symPerm = randomPermutation(gridSize, random);
+
+  const positions: Position[] = [];
+  for (let x = 0; x < gridSize; x++) {
+    for (let y = 0; y < gridSize; y++) {
+      const z = symPerm[(rowPerm[x] + colPerm[y]) % gridSize];
+      positions.push({ x, y, z });
+    }
+  }
+  return positions;
 }
 
 /**
@@ -123,36 +151,42 @@ export function reorientForMutability(
     }
   }
   const reorientSet = new Set(
-    pickDistinct(candidateIndices, Math.min(count, candidateIndices.length), random),
+    pickDistinct(
+      candidateIndices,
+      Math.min(count, candidateIndices.length),
+      random,
+    ),
   );
 
-  const newObjects: BoxObject[] = arrangement.objects.map((boxObject, index) => {
-    if (!reorientSet.has(index)) return boxObject;
+  const newObjects: BoxObject[] = arrangement.objects.map(
+    (boxObject, index) => {
+      if (!reorientSet.has(index)) return boxObject;
 
-    if (boxObject.shape === "cylinder") {
-      const circleDirection =
+      if (boxObject.shape === "cylinder") {
+        const circleDirection =
+          knownDirections[Math.floor(random() * knownDirections.length)];
+        const faceMapping: FaceMapping = {
+          top: "square",
+          front: "square",
+          side: "square",
+          [circleDirection]: "circle",
+        };
+        return { ...boxObject, faceMapping };
+      }
+
+      // triangularPrism
+      const triangleDirection =
         knownDirections[Math.floor(random() * knownDirections.length)];
+      const originalTriangle = boxObject.faceMapping[missingDirection];
       const faceMapping: FaceMapping = {
         top: "square",
         front: "square",
         side: "square",
-        [circleDirection]: "circle",
+        [triangleDirection]: originalTriangle,
       };
       return { ...boxObject, faceMapping };
-    }
-
-    // triangularPrism
-    const triangleDirection =
-      knownDirections[Math.floor(random() * knownDirections.length)];
-    const originalTriangle = boxObject.faceMapping[missingDirection];
-    const faceMapping: FaceMapping = {
-      top: "square",
-      front: "square",
-      side: "square",
-      [triangleDirection]: originalTriangle,
-    };
-    return { ...boxObject, faceMapping };
-  });
+    },
+  );
 
   return { ...arrangement, objects: newObjects };
 }
@@ -167,41 +201,17 @@ export function generateBoxArrangement(
   const count = pickIntInRange(range.min, range.max, random);
 
   const objectDefinitions = generateObjects(count, shapes, random);
-  const takenProjections = new Set<string>();
-  const objects: BoxObject[] = [];
 
-  for (const definition of objectDefinitions) {
-    let placed = false;
+  // All N² positions from a randomized Latin square are guaranteed conflict-free.
+  // Pick `count` of them randomly.
+  const allPositions = buildLatinSquarePositions(gridSize, random);
+  const positions = pickDistinct(allPositions, count, random);
 
-    for (let attempt = 0; attempt < MAX_PLACEMENT_RETRIES; attempt++) {
-      const x = pickIntInRange(0, gridSize - 1, random);
-      const y = pickIntInRange(0, gridSize - 1, random);
-      const z = pickIntInRange(0, gridSize - 1, random);
-
-      const keys = projectionKeys(x, y, z);
-      if (keys.some((key) => takenProjections.has(key))) continue;
-
-      keys.forEach((key) => takenProjections.add(key));
-      const faceMapping = assignFaceMapping(definition.shape, random);
-
-      objects.push({
-        shape: definition.shape,
-        color: definition.color,
-        x,
-        y,
-        z,
-        faceMapping,
-      });
-      placed = true;
-      break;
-    }
-
-    if (!placed) {
-      throw new Error(
-        `Failed to place object after ${MAX_PLACEMENT_RETRIES} attempts`,
-      );
-    }
-  }
+  const objects: BoxObject[] = objectDefinitions.map((definition, i) => {
+    const { x, y, z } = positions[i];
+    const faceMapping = assignFaceMapping(definition.shape, random);
+    return { shape: definition.shape, color: definition.color, x, y, z, faceMapping };
+  });
 
   return { gridSize, objects };
 }
