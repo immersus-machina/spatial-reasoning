@@ -97,6 +97,14 @@
   }
 }
 
+/* ── Game container (playing state) ─────────────────────── */
+
+.gameContainer {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+}
+
 @media (max-width: 600px) {
   .page {
     gap: 20px;
