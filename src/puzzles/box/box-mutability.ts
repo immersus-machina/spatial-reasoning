@@ -5,7 +5,7 @@ import type {
   ViewingDirection,
 } from "./box-types";
 import { isGeometricallyImpossible } from "./box-shapes";
-import { getGridPosition } from "./box-views";
+import { getGridPosition } from "./box-coordinates";
 
 // ── Helpers ──────────────────────────────────────────────────────────
 

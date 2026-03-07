@@ -23,6 +23,10 @@ vi.mock("./box-mutability", () => ({
   findMutableCells: vi.fn(),
 }));
 
+vi.mock("./box-depth-ambiguity", () => ({
+  enforceUniqueDepthMapping: vi.fn(),
+}));
+
 vi.mock("./box-shapes", async (importOriginal) => {
   const original = await importOriginal<typeof import("./box-shapes")>();
   return {
@@ -41,10 +45,16 @@ import {
 } from "./box-arrangement";
 import { computeAllProjectedViews } from "./box-views";
 import { findMutableCells } from "./box-mutability";
+import { enforceUniqueDepthMapping } from "./box-depth-ambiguity";
 
 // ── Test data ──────────────────────────────────────────────────────────
 
 const FAKE_ARRANGEMENT = {
+  gridSize: 3,
+  objects: [],
+} as unknown as BoxArrangement;
+
+const FAKE_ENFORCED_ARRANGEMENT = {
   gridSize: 3,
   objects: [],
 } as unknown as BoxArrangement;
@@ -77,6 +87,7 @@ describe("generateBoxPuzzle", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(generateBoxArrangement).mockReturnValue(FAKE_ARRANGEMENT);
+    vi.mocked(enforceUniqueDepthMapping).mockReturnValue(FAKE_ENFORCED_ARRANGEMENT);
     vi.mocked(reorientForMutability).mockReturnValue(FAKE_ARRANGEMENT);
     vi.mocked(computeAllProjectedViews).mockReturnValue(FAKE_VIEWS);
     vi.mocked(findMutableCells).mockReturnValue(FAKE_MUTABLE_CELLS);
@@ -103,7 +114,7 @@ describe("generateBoxPuzzle", () => {
     generateBoxPuzzle("easy", seededRandom(42));
 
     expect(reorientForMutability).toHaveBeenCalledWith(
-      FAKE_ARRANGEMENT,
+      FAKE_ENFORCED_ARRANGEMENT,
       expect.any(String),
       expect.any(Number),
       expect.any(Function),
@@ -111,26 +122,37 @@ describe("generateBoxPuzzle", () => {
   });
 
 
-  it("computes all views from the arrangement", () => {
-    generateBoxPuzzle("easy", seededRandom(42));
+  it("calls enforceUniqueDepthMapping with arrangement and missing direction", () => {
+    const random = seededRandom(42);
+    const puzzle = generateBoxPuzzle("hard", random);
 
-    expect(computeAllProjectedViews).toHaveBeenCalled();
+    expect(enforceUniqueDepthMapping).toHaveBeenCalledWith(
+      FAKE_ARRANGEMENT,
+      puzzle.missingDirection,
+      random,
+    );
   });
 
-  it("calls findMutableCells with arrangement and missing direction", () => {
+  it("computes all views from the enforced arrangement", () => {
+    generateBoxPuzzle("easy", seededRandom(42));
+
+    expect(computeAllProjectedViews).toHaveBeenCalledWith(FAKE_ENFORCED_ARRANGEMENT);
+  });
+
+  it("calls findMutableCells with enforced arrangement and missing direction", () => {
     const puzzle = generateBoxPuzzle("easy", seededRandom(42));
 
     expect(findMutableCells).toHaveBeenCalledWith(
-      FAKE_ARRANGEMENT,
+      FAKE_ENFORCED_ARRANGEMENT,
       puzzle.missingDirection,
       expect.any(Object),
     );
   });
 
-  it("returns the arrangement from generateBoxArrangement", () => {
+  it("returns the enforced arrangement", () => {
     const puzzle = generateBoxPuzzle("hard", seededRandom(42));
 
-    expect(puzzle.arrangement).toBe(FAKE_ARRANGEMENT);
+    expect(puzzle.arrangement).toBe(FAKE_ENFORCED_ARRANGEMENT);
   });
 
   it("returns exactly 2 known views and 3 wrong views", () => {

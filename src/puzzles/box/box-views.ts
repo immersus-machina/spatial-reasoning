@@ -1,34 +1,10 @@
 import type {
   BoxArrangement,
-  BoxObject,
   ProjectedCell,
   ProjectedView,
   ViewingDirection,
 } from "./box-types";
-
-// ── Projection ────────────────────────────────────────────────────────
-
-/**
- * Compute the (row, column) grid position for an object in a given view.
- *
- * Projection axes (standard right-handed convention):
- * - Top  (looking down Y): row = x, column = z
- * - Front (looking along Z): row = y, column = x
- * - Side (looking along X): row = y, column = z
- */
-export function getGridPosition(
-  boxObject: BoxObject,
-  direction: ViewingDirection,
-): { row: number; column: number } {
-  switch (direction) {
-    case "top":
-      return { row: boxObject.x, column: boxObject.z };
-    case "front":
-      return { row: boxObject.y, column: boxObject.x };
-    case "side":
-      return { row: boxObject.y, column: boxObject.z };
-  }
-}
+import { getGridPosition } from "./box-coordinates";
 
 // ── Public API ────────────────────────────────────────────────────────
 

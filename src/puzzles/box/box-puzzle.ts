@@ -16,6 +16,7 @@ import {
 } from "./box-arrangement";
 import { computeAllProjectedViews } from "./box-views";
 import { findMutableCells } from "./box-mutability";
+import { enforceUniqueDepthMapping } from "./box-depth-ambiguity";
 import { pickDistinct } from "../../utils/random";
 
 // ── Constants ─────────────────────────────────────────────────────────
@@ -70,6 +71,8 @@ export function generateBoxPuzzle(
     ViewingDirection,
     ViewingDirection,
   ];
+
+  arrangement = enforceUniqueDepthMapping(arrangement, missingDirection, random);
 
   const allowedFlatShapes =
     difficulty === "easy" ? EASY_FLAT_SHAPES : ALL_FLAT_SHAPES;

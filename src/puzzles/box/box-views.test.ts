@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { getGridPosition, projectView, computeAllProjectedViews } from "./box-views";
+import { projectView, computeAllProjectedViews } from "./box-views";
+import { getGridPosition } from "./box-coordinates";
 import { generateBoxArrangement } from "./box-arrangement";
 import type { BoxArrangement, BoxObject, FaceMapping } from "./box-types";
 import { seededRandom } from "../../tests/seeded-random";
