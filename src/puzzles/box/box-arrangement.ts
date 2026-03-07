@@ -79,8 +79,8 @@ function randomPermutation(n: number, random: () => number): number[] {
  *
  * A Latin square L[x][y] = z ensures:
  * - All (x, z) pairs are distinct (top projection)
- * - All (z, y) pairs are distinct (front projection)
- * - All (x, y) pairs are distinct (side projection)
+ * - All (x, y) pairs are distinct (front projection)
+ * - All (y, z) pairs are distinct (side projection)
  *
  * We start with L[x][y] = (x + y) % N and randomize by permuting
  * the row indices, column indices, and symbol values.

@@ -11,10 +11,10 @@ import type {
 /**
  * Compute the (row, column) grid position for an object in a given view.
  *
- * Projection axes:
+ * Projection axes (standard right-handed convention):
  * - Top  (looking down Y): row = x, column = z
- * - Front (looking along X): row = y, column = z
- * - Side (looking along Z): row = y, column = x
+ * - Front (looking along Z): row = y, column = x
+ * - Side (looking along X): row = y, column = z
  */
 export function getGridPosition(
   boxObject: BoxObject,
@@ -24,9 +24,9 @@ export function getGridPosition(
     case "top":
       return { row: boxObject.x, column: boxObject.z };
     case "front":
-      return { row: boxObject.y, column: boxObject.z };
-    case "side":
       return { row: boxObject.y, column: boxObject.x };
+    case "side":
+      return { row: boxObject.y, column: boxObject.z };
   }
 }
 

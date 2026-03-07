@@ -27,12 +27,12 @@ describe("getGridPosition", () => {
     expect(getGridPosition(boxObject, "top")).toEqual({ row: 1, column: 0 });
   });
 
-  it("front view uses row=y, column=z", () => {
-    expect(getGridPosition(boxObject, "front")).toEqual({ row: 2, column: 0 });
+  it("front view uses row=y, column=x", () => {
+    expect(getGridPosition(boxObject, "front")).toEqual({ row: 2, column: 1 });
   });
 
-  it("side view uses row=y, column=x", () => {
-    expect(getGridPosition(boxObject, "side")).toEqual({ row: 2, column: 1 });
+  it("side view uses row=y, column=z", () => {
+    expect(getGridPosition(boxObject, "side")).toEqual({ row: 2, column: 0 });
   });
 
   it("works with larger coordinates", () => {
@@ -58,26 +58,26 @@ describe("projectView", () => {
     expect(view.cells).toHaveLength(2);
   });
 
-  it("projects front view using (y, z) coordinates", () => {
+  it("projects front view using (y, x) coordinates", () => {
     const arrangement = makeTestArrangement();
     const view = projectView(arrangement, "front");
 
-    // Object at (0,0,0): front → row=y=0, column=z=0
+    // Object at (0,0,0): front → row=y=0, column=x=0
     const cell0 = view.cells.find((c) => c.row === 0 && c.column === 0);
     expect(cell0).toMatchObject({ shape: "square", color: "red" });
-    // Object at (1,1,1): front → row=y=1, column=z=1
+    // Object at (1,1,1): front → row=y=1, column=x=1
     const cell1 = view.cells.find((c) => c.row === 1 && c.column === 1);
     expect(cell1).toMatchObject({ shape: "square", color: "blue" });
   });
 
-  it("projects side view using (y, x) coordinates", () => {
+  it("projects side view using (y, z) coordinates", () => {
     const arrangement = makeTestArrangement();
     const view = projectView(arrangement, "side");
 
-    // Object at (0,0,0): side → row=y=0, column=x=0
+    // Object at (0,0,0): side → row=y=0, column=z=0
     const cell0 = view.cells.find((c) => c.row === 0 && c.column === 0);
     expect(cell0).toMatchObject({ shape: "triangleUp", color: "red" });
-    // Object at (1,1,1): side → row=y=1, column=x=1
+    // Object at (1,1,1): side → row=y=1, column=z=1
     const cell1 = view.cells.find((c) => c.row === 1 && c.column === 1);
     expect(cell1).toMatchObject({ shape: "square", color: "blue" });
   });

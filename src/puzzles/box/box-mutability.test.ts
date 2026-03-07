@@ -100,9 +100,9 @@ describe("findMutableCells", () => {
 
     const mutable = findMutableCells(arrangement, "side", EASY_FLAT_SHAPES);
     expect(mutable).toHaveLength(1);
-    // side: row=y=2, column=x=1
+    // side: row=y=2, column=z=0
     expect(mutable[0].row).toBe(2);
-    expect(mutable[0].column).toBe(1);
+    expect(mutable[0].column).toBe(0);
   });
 
   it("preserves original color", () => {

@@ -40,10 +40,10 @@ describe("generateBoxArrangement", () => {
       const topKeys = arrangement.objects.map((o) => `${o.x},${o.z}`);
       expect(new Set(topKeys).size).toBe(topKeys.length);
 
-      const frontKeys = arrangement.objects.map((o) => `${o.z},${o.y}`);
+      const frontKeys = arrangement.objects.map((o) => `${o.y},${o.x}`);
       expect(new Set(frontKeys).size).toBe(frontKeys.length);
 
-      const sideKeys = arrangement.objects.map((o) => `${o.x},${o.y}`);
+      const sideKeys = arrangement.objects.map((o) => `${o.y},${o.z}`);
       expect(new Set(sideKeys).size).toBe(sideKeys.length);
     }
   });
