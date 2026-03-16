@@ -53,6 +53,10 @@ jobs:
           output_location: "dist" # Built app content directory - optional
           github_id_token: ${{ steps.idtoken.outputs.result }}
           ###### End of Repository/Build Configurations ######
+      - name: Ping IndexNow
+        if: github.event_name == 'push'
+        run: |
+          curl -s "https://www.bing.com/indexnow?url=https://spatial.immersus-machina.com/&key=76911c103d59e3fe9b568068e79b486f"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
