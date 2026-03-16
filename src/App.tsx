@@ -20,6 +20,10 @@ function Credit() {
       <a href="https://www.immersus-machina.com" target="_blank" rel="noopener noreferrer">
         Immersus Machina
       </a>
+      <br />
+      <a href="https://github.com/immersus-machina/spatial-reasoning" target="_blank" rel="noopener noreferrer">
+        GitHub
+      </a>
     </p>
   );
 }
