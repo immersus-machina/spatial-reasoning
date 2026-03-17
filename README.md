@@ -8,6 +8,8 @@ Spatial reasoning — the ability to mentally visualize and manipulate objects i
 
 The puzzle designs draw on prior work in cognitive spatial assessment, now delivered as an accessible, zero-install web experience. The UI is intentionally minimal — the focus is on the game mechanics and the spatial reasoning they require, not on visual polish.
 
+Try it live at [spatial.immersus-machina.com](https://spatial.immersus-machina.com).
+
 ## Puzzles
 
 ### Cube Rotation
