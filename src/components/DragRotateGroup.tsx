@@ -28,6 +28,7 @@ export function DragRotateGroup({
     const q = new THREE.Quaternion();
 
     const onPointerDown = (e: PointerEvent) => {
+      e.preventDefault();
       isDragging = true;
       lastX = e.clientX;
       lastY = e.clientY;
@@ -36,6 +37,7 @@ export function DragRotateGroup({
 
     const onPointerMove = (e: PointerEvent) => {
       if (!isDragging || !groupRef.current) return;
+      e.preventDefault();
 
       const dx = e.clientX - lastX;
       const dy = e.clientY - lastY;
